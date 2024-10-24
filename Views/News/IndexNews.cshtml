@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AmsT4_BLOG_2.Models.News>
+
+@{
+    ViewData["Title"] = "Histórico";
+}
+
+<h1>Histórico</h1>
+
+<p>
+    <a asp-action="CreateNews" class="btn btn-primary">Criar uma nova notícia</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Title)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Description)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Author)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Category)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().ImageUrl)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().PublishedDate)</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Author)</td>
+                <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                <td>
+                    <img src="@item.ImageUrl" alt="@item.Title" style="width: 100px; height: auto;" />
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.PublishedDate)</td>
+                <td>
+                    <a asp-action="EditNews" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a> |
+                    <a asp-action="DetailsNews" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalhes</a> |
+                    <a asp-action="DeleteNews" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
